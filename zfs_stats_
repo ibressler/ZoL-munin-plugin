@@ -2,6 +2,8 @@
 # A port of ZFS stats for FreeBSD plugin to Linux
 # Author of the original plugin: David Bjornsson <dabb@lolnet.is>
 # Author of the Linux port: Alex Chistyakov <alexclear@gmail.com>
+# Author of Modifications to the Linux port in this fork:
+#   Ingo Breßler <dev@ingobressler.net>
 #
 # Usage: zfs_stats_FUNCTION
 #
@@ -13,6 +15,11 @@
 #	l2utilization - L2ARC size breakdown
 #	l2efficiency - L2ARC efficiency
 #	fragmentation - pool fragmentation
+#
+# zfs_stats_fragmentation needs to be run as root,
+# configure munin accordingly in /etc/munin/plugin-conf.d/:
+# [zfs_stats_fragmentation]
+# user root
 #
 #%# family=auto
 

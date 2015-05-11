@@ -12,8 +12,10 @@ How to configure
     ln -s /usr/local/bin/zfs_stats_ /etc/munin/plugins/zfs_stats_cachehitdtype
     ln -s /usr/local/bin/zfs_stats_ /etc/munin/plugins/zfs_stats_cachehitlist
     ln -s /usr/local/bin/zfs_stats_ /etc/munin/plugins/zfs_stats_efficiency
+    ln -s /usr/local/bin/zfs_stats_ /etc/munin/plugins/zfs_stats_utilization
+    ln -s /usr/local/bin/zfs_stats_ /etc/munin/plugins/zfs_stats_fragmentation
 
-    cat <<EOF >> /etc/munin/plugin-conf.d/munin-node
+    cat <<EOF > /etc/munin/plugin-conf.d/zfs-stats
     [zfs_*]
     user root
     EOF
