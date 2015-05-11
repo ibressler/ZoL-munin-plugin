@@ -12,6 +12,7 @@
 #	utilization - ARC size breakdown
 #	l2utilization - L2ARC size breakdown
 #	l2efficiency - L2ARC efficiency
+#	fragmentation - pool fragmentation
 #
 #%# family=auto
 
@@ -238,7 +239,27 @@ l2efficiency() {
 		echo 'l2_hits.value ' $L2_HIT_RATIO_PERC
 		echo 'l2_misses.value ' $L2_MISS_RATIO_PERC
 	fi
+}
 
+fragmentation() {
+        FRAG=$(zpool get -pH fragmentation)
+        IFS="$(printf '\n')"
+	if [ "$1" = "config" ]; then
+		echo 'graph_title ZFS Pool Fragmentation'
+                echo 'graph_args -u 100'
+                echo 'graph_vlabel %'
+                echo 'graph_info This graph shows the fragmentation of each pool'
+                for line in $(echo $FRAG); do
+                        name="$(echo $line | awk '{print $1}')"
+                        echo "${name}.label $name"
+                done
+	else
+                for line in $(echo $FRAG); do
+                        name="$(echo $line | awk '{print $1}')"
+                        value="$(echo $line | awk '{gsub("%", "", $3); print $3}')"
+                        echo "${name}.value $value"
+                done
+	fi
 }
 
 [ "$1" = "config" ] && echo "graph_category zfs"
@@ -261,5 +282,8 @@ case "$FUNCTION" in
 		;;
 	l2efficiency)
 		l2efficiency $1
+		;;
+	fragmentation)
+		fragmentation $1
 		;;
 esac
