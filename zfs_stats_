@@ -54,7 +54,7 @@ PREFETCH_METADATA_HITS=`echo "$CONTENT" | grep "^prefetch_metadata_hits" | awk '
 PREFETCH_METADATA_MISSES=`echo "$CONTENT" | grep "^prefetch_metadata_misses" | awk '{print $3;}'`
 
 SIZE=`echo "$CONTENT" | grep "^size" | awk '{print $3;}'`
-MRU_SIZE=`echo "$CONTENT" | grep "^p\s" | awk '{print $3;}'`
+MRU_SIZE=`echo "$CONTENT" | grep "^mru_size" | awk '{print $3;}'`
 MAX_SIZE=`echo "$CONTENT" | grep "^c_max" | awk '{print $3;}'`
 MIN_SIZE=`echo "$CONTENT" | grep "^c_min" | awk '{print $3;}'`
 TARGET_SIZE=`echo "$CONTENT" | grep "^c\s" | awk '{print $3;}'`
